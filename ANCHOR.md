@@ -72,9 +72,9 @@ Branch: main
 
 \- Pandoc:
 
-&nbsp; - `pandoc --version` failed (not recognized)
+&nbsp; - once pandoc --version works, and under “Manuscript source” keep:
 
-&nbsp; - Installing via: `winget install --id JohnMacFarlane.Pandoc -e`
+&nbsp; - Installed via: `winget install --id JohnMacFarlane.Pandoc -e`
 
 &nbsp; - After install: reopen PowerShell, then run:
 
