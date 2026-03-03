@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import re
+import shlex
+import shutil
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -31,15 +33,20 @@ def ensure_dir(p: Path) -> None:
     p.mkdir(parents=True, exist_ok=True)
 
 
+def require_tool(exe: str) -> None:
+    if shutil.which(exe) is None:
+        raise RuntimeError(f"Required tool not found on PATH: {exe}")
+
+
 def run(cmd: list[str], cwd: Path) -> None:
-    print("RUN:", " ".join(cmd))
-    subprocess.check_call(cmd, cwd=cwd)
+    print(f"RUN (cwd={cwd}):", shlex.join(cmd))
+    subprocess.run(cmd, cwd=cwd, check=True)
 
 
 def slugify(s: str) -> str:
     s = s.strip().lower()
-    s = re.sub(r"[^\w\s-]", "", s)   # drop punctuation
-    s = re.sub(r"[\s_-]+", "-", s)   # collapse whitespace/underscores
+    s = re.sub(r"[^\w\s-]", "", s)  # drop punctuation
+    s = re.sub(r"[\s_-]+", "-", s)  # collapse whitespace/underscores
     s = s.strip("-")
     return s or "book"
 
@@ -115,6 +122,16 @@ def parse_args(argv: list[str]) -> tuple[Path | None, Targets, Path | None, Path
     return args.project_root, targets, args.src, args.meta, args.out_stem
 
 
+def resolve_under_root(root: Path, p: Path | None) -> Path | None:
+    """
+    If p is relative, treat it as relative to PROJECT_ROOT.
+    This keeps existence checks and subprocess cwd behavior consistent.
+    """
+    if p is None:
+        return None
+    return (root / p).resolve() if not p.is_absolute() else p.resolve()
+
+
 def print_config(pp, src: Path, meta: Path | None, out_stem: str) -> None:
     lines = [
         "Build config",
@@ -141,7 +158,7 @@ def validate_skeleton(pp) -> None:
 
 def manuscript_source(pp, src_arg: Path | None) -> Path:
     # Default location. Override with --src.
-    return src_arg if src_arg is not None else (pp.publication / "manuscript.md")
+    return src_arg if src_arg is not None else pp.manuscript_md
 
 
 def build_pdf(pp, src: Path, out_stem: str) -> None:
@@ -181,7 +198,17 @@ def main(argv: list[str]) -> int:
     project_root, targets, src_arg, meta_arg, out_stem_arg = parse_args(argv)
     pp = project_paths(project_root)
 
+    # Preflight tools so failures are readable and early.
+    require_tool("pandoc")
+    if targets.pdf:
+        require_tool("xelatex")
+
     src = manuscript_source(pp, src_arg)
+    src = resolve_under_root(pp.root, src)
+    assert src is not None  # for type checkers; src is always a Path here
+
+    meta_arg = resolve_under_root(pp.root, meta_arg)
+
     out_stem = compute_out_stem(src=src, meta=meta_arg, out_stem=out_stem_arg)
 
     print_config(pp, src=src, meta=meta_arg, out_stem=out_stem)
