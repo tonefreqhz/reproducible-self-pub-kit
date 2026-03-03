@@ -54,8 +54,8 @@ def project_paths(project_root: Path | None = None) -> ProjectPaths:
     root = (project_root or find_project_root()).resolve()
     return ProjectPaths(
         root=root,
-        manuscript_md=root / "manuscript_md",
-        manuscript_docx=root / "manuscript_docx",
+        manuscript_md=root / "publication" / "manuscript.md",
+        manuscript_docx=root / "outputs" / "docx" / "book.docx",
         assets=root / "assets",
         inputs=root / "inputs",
         inputs_canonical=root / "inputs" / "canonical",
@@ -65,3 +65,4 @@ def project_paths(project_root: Path | None = None) -> ProjectPaths:
         publish=root / "publish",
         templates=root / "templates",
     )
+
