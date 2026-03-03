@@ -22,21 +22,31 @@ class ProjectPaths:
 def find_project_root(start: Path | None = None) -> Path:
     """
     Resolve repo root by walking up until we find a marker file/dir.
+
+    Works both for:
+    - git checkouts (marker: .git)
+    - zip downloads / copied folders (markers: README.md, PRINT_AND_BUILD_NOTES.md, etc.)
+
     This must not depend on the current working directory.
     """
     here = (start or Path(__file__)).resolve()
     if here.is_file():
         here = here.parent
 
-    markers = {"PRINT_AND_BUILD_NOTES.md", ".git", "pyproject.toml"}
+    markers: tuple[str, ...] = (
+        "PRINT_AND_BUILD_NOTES.md",
+        "README.md",
+        ".git",
+        "pyproject.toml",
+    )
 
-    for p in [here, *here.parents]:
+    for p in (here, *here.parents):
         if any((p / m).exists() for m in markers):
             return p
 
     raise RuntimeError(
-        f"Could not find PROJECT_ROOT starting from {here}. "
-        f"Expected one of: {', '.join(sorted(markers))}"
+        "Could not find PROJECT_ROOT starting from "
+        f"{here}. Expected one of: {', '.join(markers)}"
     )
 
 
