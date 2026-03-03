@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -20,8 +21,18 @@ def must_exist_dir(p: Path, label: str) -> None:
         raise FileNotFoundError(f"Expected {label} directory to exist: {p}")
 
 
+def must_exist_file(p: Path, label: str) -> None:
+    if not p.exists() or not p.is_file():
+        raise FileNotFoundError(f"Expected {label} file to exist: {p}")
+
+
 def ensure_dir(p: Path) -> None:
     p.mkdir(parents=True, exist_ok=True)
+
+
+def run(cmd: list[str], cwd: Path) -> None:
+    print("RUN:", " ".join(cmd))
+    subprocess.check_call(cmd, cwd=cwd)
 
 
 def parse_args(argv: list[str]) -> tuple[Path | None, Targets]:
@@ -40,11 +51,8 @@ def parse_args(argv: list[str]) -> tuple[Path | None, Targets]:
 
     args = ap.parse_args(argv)
 
-    # If nothing specified, treat as --all for convenience.
     any_flag = args.all or args.pdf or args.epub or args.docx
-    if not any_flag:
-        targets = Targets(pdf=True, epub=True, docx=True)
-    elif args.all:
+    if not any_flag or args.all:
         targets = Targets(pdf=True, epub=True, docx=True)
     else:
         targets = Targets(pdf=args.pdf, epub=args.epub, docx=args.docx)
@@ -73,25 +81,70 @@ def validate_skeleton(pp) -> None:
     print("OK: path sanity checks passed.")
 
 
+def manuscript_source(pp) -> Path:
+    # Change this if your main markdown file has a different name/location.
+    return pp.publication / "manuscript.md"
+
+
 def build_pdf(pp) -> None:
     out_dir = pp.outputs / "pdf"
     ensure_dir(out_dir)
-    # TODO: render PDF into out_dir (e.g., out_dir / "book.pdf")
-    print(f"TODO: build PDF -> {out_dir}")
+
+    src = manuscript_source(pp)
+    must_exist_file(src, "manuscript markdown")
+
+    out = out_dir / "book.pdf"
+    run(
+        [
+            "pandoc",
+            str(src),
+            "-o",
+            str(out),
+            "--pdf-engine=xelatex",
+        ],
+        cwd=pp.root,
+    )
+    print(f"Built PDF: {out}")
 
 
 def build_epub(pp) -> None:
     out_dir = pp.outputs / "epub"
     ensure_dir(out_dir)
-    # TODO: render EPUB into out_dir (e.g., out_dir / "book.epub")
-    print(f"TODO: build EPUB -> {out_dir}")
+
+    src = manuscript_source(pp)
+    must_exist_file(src, "manuscript markdown")
+
+    out = out_dir / "book.epub"
+    run(
+        [
+            "pandoc",
+            str(src),
+            "-o",
+            str(out),
+        ],
+        cwd=pp.root,
+    )
+    print(f"Built EPUB: {out}")
 
 
 def build_docx(pp) -> None:
     out_dir = pp.outputs / "docx"
     ensure_dir(out_dir)
-    # TODO: render DOCX into out_dir (e.g., out_dir / "book.docx")
-    print(f"TODO: build DOCX -> {out_dir}")
+
+    src = manuscript_source(pp)
+    must_exist_file(src, "manuscript markdown")
+
+    out = out_dir / "book.docx"
+    run(
+        [
+            "pandoc",
+            str(src),
+            "-o",
+            str(out),
+        ],
+        cwd=pp.root,
+    )
+    print(f"Built DOCX: {out}")
 
 
 def main(argv: list[str]) -> int:
@@ -101,7 +154,6 @@ def main(argv: list[str]) -> int:
     print_config(pp)
     validate_skeleton(pp)
 
-    # Sequential, deterministic order
     if targets.pdf:
         build_pdf(pp)
     if targets.epub:
