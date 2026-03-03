@@ -1,24 +1,17 @@
-from __future__ import annotations
+$ErrorActionPreference = "Stop"
 
-import subprocess
-import sys
-from pathlib import Path
+# Always resolve PROJECT_ROOT relative to this script (not the current directory).
+$PROJECT_ROOT = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 
+# Locate Python launcher
+$py = Get-Command py -ErrorAction SilentlyContinue
+if (-not $py) { throw "Python launcher 'py' not found. Install Python for Windows (adds 'py')." }
 
-def run(cmd: list[str], cwd: Path) -> None:
-    print("RUN:", " ".join(cmd))
-    subprocess.check_call(cmd, cwd=cwd)
+# Target script (fail fast if it moved/renamed)
+$script = Join-Path $PROJECT_ROOT "tools\build_book.py"
+if (-not (Test-Path $script)) { throw "Build script not found: $script" }
 
-
-def main(argv: list[str]) -> int:
-    root = Path(__file__).resolve().parents[1]
-
-    run([sys.executable, "tools/build_book.py", "--all"], cwd=root)
-    run([sys.executable, "tools/build_pamphlet.py", "--all"], cwd=root)
-
-    print("OK: build_all finished.")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main(sys.argv[1:]))
+# Execute
+Write-Host "PROJECT_ROOT=$PROJECT_ROOT"
+Write-Host "RUN: $($py.Source) `"$script`" --project-root `"$PROJECT_ROOT`""
+& $py.Source $script --project-root $PROJECT_ROOT

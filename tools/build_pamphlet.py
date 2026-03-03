@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import shlex
+import shutil
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -30,9 +32,14 @@ def ensure_dir(p: Path) -> None:
     p.mkdir(parents=True, exist_ok=True)
 
 
+def require_tool(exe: str) -> None:
+    if shutil.which(exe) is None:
+        raise RuntimeError(f"Required tool not found on PATH: {exe}")
+
+
 def run(cmd: list[str], cwd: Path) -> None:
-    print("RUN:", " ".join(cmd))
-    subprocess.check_call(cmd, cwd=cwd)
+    print(f"RUN (cwd={cwd}):", shlex.join(cmd))
+    subprocess.run(cmd, cwd=cwd, check=True)
 
 
 def parse_args(argv: list[str]) -> tuple[Path | None, Targets]:
@@ -73,8 +80,11 @@ def print_config(pp, src: Path, out_root: Path) -> None:
 
 def validate_skeleton(pp) -> None:
     must_exist_dir(pp.inputs, "inputs")
-    must_exist_dir(pp.outputs, "outputs")
     must_exist_dir(pp.publication, "publication")
+
+    # ANCHOR: outputs/ is created on build, so don't require it to exist up front.
+    ensure_dir(pp.outputs)
+
     print("OK: path sanity checks passed.")
 
 
@@ -152,6 +162,11 @@ def build_docx(pp, src: Path, out_root: Path) -> None:
 def main(argv: list[str]) -> int:
     project_root, targets = parse_args(argv)
     pp = project_paths(project_root)
+
+    # Preflight tools so failures are early and readable.
+    require_tool("pandoc")
+    if targets.pdf:
+        require_tool("xelatex")
 
     src = pamphlet_source(pp)
     out_root = pp.outputs / "pamphlet"
