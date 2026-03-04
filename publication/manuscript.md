@@ -1,4 +1,4 @@
-﻿# Reproducible SelfPub Kit
+﻿# Reproducible SelfPub Kit - Manuscript
 
 Release notes for writers whove been burned by little quirks
 You are not expected to understand this.
@@ -27,7 +27,7 @@ This pamphlet is a small answer: one canonical manuscript + one repeatable build
 
 ---
 
-# Contents & Foreword
+# Reproducible SelfPub Kit - Manuscript
 
 Contents
 Origin Story: the quirks that ate publication day
@@ -48,7 +48,7 @@ This kit is how you stop drift from running your publishing schedule.
 
 ---
 
-# 1) Origin Story: the quirks that ate publication day
+# Reproducible SelfPub Kit - Manuscript
 
 Draft2Digital is brilliant at distribution. Reedsy is great for production. And yetbetween toolstiny quirks can hold up publication like a pebble in a train door.
 
@@ -80,7 +80,7 @@ Confirm code fences are balanced (even count):
 
 ---
 
-# 2) Ground Truth: one manuscript, many outputs
+# Reproducible SelfPub Kit - Manuscript
 
 Publishing pain usually comes from one root cause:
 
@@ -127,7 +127,7 @@ When youre tired, obvious becomes expensive. Anchor files are cheap insurance.
 
 ---
 
-# 3) Versioning with Git: stop selling yourself work you already did
+# Reproducible SelfPub Kit - Manuscript
 
 Git is not here to turn you into a developer. Its here to prevent these disasters:
 
@@ -166,7 +166,7 @@ Your future self doesnt need poetry. They need context.
 
 ---
 
-# 4) Metadata discipline: titles, subtitles, series, and the Great Drift
+# Reproducible SelfPub Kit - Manuscript
 
 Metadata is the most boring part of publishinguntil it costs you hours.
 
@@ -195,7 +195,7 @@ EPUB readers and libraries surface metadata aggressively. If your EPUB looks wro
 
 ---
 
-# 5) Covers that match reality (outside and inside)
+# Reproducible SelfPub Kit - Manuscript
 
 Covers are where drift becomes visible and embarrassing.
 
@@ -219,7 +219,7 @@ Make metadata edits once, then rebuild and re-export.
 
 ---
 
-# 6) Flexible by design: kids books  technical  academic
+# Reproducible SelfPub Kit - Manuscript
 
 Different writers have different habits. Good. The workflow should adapt without breaking.
 
@@ -248,7 +248,7 @@ If you cant explain why a formatting trick exists in one sentence, it doesnt bel
 
 ---
 
-# 7) Quick timeline + firstship checklist
+# Reproducible SelfPub Kit - Manuscript
 
 Getting to shipped is mostly reducing avoidable surprises.
 
@@ -287,7 +287,7 @@ Most disasters show up right there.
 
 ---
 
-# 8) Microindex for tired humans
+# Reproducible SelfPub Kit - Manuscript
 
 This is the Im panicking, where is that thing section.
 
