@@ -97,7 +97,7 @@ def parse_args(argv: list[str]) -> tuple[Path | None, Targets, Path | None, Path
         "--meta",
         type=Path,
         default=None,
-        help="Optional metadata file with e.g. a 'title: ...' line (used for output naming).",
+        help="Optional metadata file (Pandoc --metadata-file) and used for output naming (title: ...).",
     )
     ap.add_argument(
         "--out-stem",
@@ -161,36 +161,52 @@ def manuscript_source(pp, src_arg: Path | None) -> Path:
     return src_arg if src_arg is not None else pp.manuscript_md
 
 
-def build_pdf(pp, src: Path, out_stem: str) -> None:
+def pandoc_base_cmd(src: Path, out: Path, meta: Path | None) -> list[str]:
+    """
+    Construct a Pandoc command that always includes source and output,
+    and conditionally includes a metadata file.
+    """
+    cmd = ["pandoc", str(src), "-o", str(out)]
+    if meta is not None:
+        must_exist_file(meta, "metadata")
+        cmd.extend(["--metadata-file", str(meta)])
+    return cmd
+
+
+def build_pdf(pp, src: Path, out_stem: str, meta: Path | None) -> None:
     out_dir = pp.outputs / "pdf"
     ensure_dir(out_dir)
 
     must_exist_file(src, "manuscript markdown")
 
     out = out_dir / f"{out_stem}.pdf"
-    run(["pandoc", str(src), "-o", str(out), "--pdf-engine=xelatex"], cwd=pp.root)
+    cmd = pandoc_base_cmd(src=src, out=out, meta=meta)
+    cmd.extend(["--pdf-engine=xelatex"])
+    run(cmd, cwd=pp.root)
     print(f"Built PDF: {out}")
 
 
-def build_epub(pp, src: Path, out_stem: str) -> None:
+def build_epub(pp, src: Path, out_stem: str, meta: Path | None) -> None:
     out_dir = pp.outputs / "epub"
     ensure_dir(out_dir)
 
     must_exist_file(src, "manuscript markdown")
 
     out = out_dir / f"{out_stem}.epub"
-    run(["pandoc", str(src), "-o", str(out)], cwd=pp.root)
+    cmd = pandoc_base_cmd(src=src, out=out, meta=meta)
+    run(cmd, cwd=pp.root)
     print(f"Built EPUB: {out}")
 
 
-def build_docx(pp, src: Path, out_stem: str) -> None:
+def build_docx(pp, src: Path, out_stem: str, meta: Path | None) -> None:
     out_dir = pp.outputs / "docx"
     ensure_dir(out_dir)
 
     must_exist_file(src, "manuscript markdown")
 
     out = out_dir / f"{out_stem}.docx"
-    run(["pandoc", str(src), "-o", str(out)], cwd=pp.root)
+    cmd = pandoc_base_cmd(src=src, out=out, meta=meta)
+    run(cmd, cwd=pp.root)
     print(f"Built DOCX: {out}")
 
 
@@ -205,7 +221,7 @@ def main(argv: list[str]) -> int:
 
     src = manuscript_source(pp, src_arg)
     src = resolve_under_root(pp.root, src)
-    assert src is not None  # for type checkers; src is always a Path here
+    assert src is not None  # src is always a Path here
 
     meta_arg = resolve_under_root(pp.root, meta_arg)
 
@@ -215,11 +231,11 @@ def main(argv: list[str]) -> int:
     validate_skeleton(pp)
 
     if targets.pdf:
-        build_pdf(pp, src, out_stem)
+        build_pdf(pp, src, out_stem, meta_arg)
     if targets.epub:
-        build_epub(pp, src, out_stem)
+        build_epub(pp, src, out_stem, meta_arg)
     if targets.docx:
-        build_docx(pp, src, out_stem)
+        build_docx(pp, src, out_stem, meta_arg)
 
     print("OK: build finished (sequential).")
     return 0
