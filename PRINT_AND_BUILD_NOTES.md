@@ -127,3 +127,219 @@ Latest repo state report: `publication/_reports/repo_state_2026-03-04_193619.md`
 
 
 
+
+---
+
+## Stage 1 promise (what this repo guarantees)
+
+If you follow the canonical workflow in this repo on Windows (PowerShell), Stage 1 guarantees:
+
+- reproducible builds (same inputs  same output locations)
+- a consistent, repeatable command surface (no mystery steps)
+- upload-ready artifacts for common distributors
+
+Stage 1 is optimized for prose-first content. Math-heavy technical publishing is best-effort in this release.
+
+---
+
+## Draft2Digital (ebook)  upload checklist
+
+### Build
+
+From repo root:
+
+~~~powershell
+.\publish\rebuild_publish.ps1
+~~~
+
+Confirm outputs exist (paths may vary by script target, but should be under `outputs/`):
+
+- `outputs\epub\... .epub` (preferred for D2D)
+- `outputs\docx\... .docx` (fallback)
+
+### Cover (ebook front)
+
+Prepare a front cover image (JPG/PNG). Suggested repo location:
+
+- `assets\cover\ebook_front.png`
+
+### Upload to Draft2Digital
+
+- Upload cover: use your front cover image
+- Upload book file: use the EPUB from `outputs\epub\`
+
+---
+
+## Print (if used)  interior + cover wrap
+
+### Interior PDF
+Use the print interior PDF generated under `outputs\pdf\`.
+
+### Cover wrap PDF (to do)
+Create a full wrap cover PDF sized to trim + spine + bleed. Suggested repo location:
+
+- `assets\cover\print_wrap.pdf`
+
+
+---
+
+## Stage 1 promise (what this repo guarantees)
+
+If you follow the canonical workflow in this repo on Windows (PowerShell), Stage 1 guarantees:
+
+- reproducible builds (same inputs  same output locations)
+- a consistent, repeatable command surface (no mystery steps)
+- upload-ready artifacts for common distributors
+
+Stage 1 is optimized for prose-first content. Math-heavy technical publishing is best-effort in this release.
+
+---
+
+## Draft2Digital (ebook)  upload checklist
+
+### Build
+
+From repo root:
+
+~~~powershell
+.\publish\rebuild_publish.ps1
+~~~
+
+Confirm outputs exist (paths may vary by script target, but should be under `outputs/`):
+
+- `outputs\epub\... .epub` (preferred for D2D)
+- `outputs\docx\... .docx` (fallback)
+
+### Cover (ebook front)
+
+Prepare a front cover image (JPG/PNG). Suggested repo location:
+
+- `assets\cover\ebook_front.png`
+
+### Upload to Draft2Digital
+
+- Upload cover: use your front cover image
+- Upload book file: use the EPUB from `outputs\epub\`
+
+---
+
+## Print (if used)  interior + cover wrap
+
+### Interior PDF
+Use the print interior PDF generated under `outputs\pdf\`.
+
+### Cover wrap PDF (to do)
+Create a full wrap cover PDF sized to trim + spine + bleed. Suggested repo location:
+
+- `assets\cover\print_wrap.pdf`
+
+
+---
+
+## Stage 1 promise (what this repo guarantees)
+
+If you follow the canonical workflow in this repo on Windows (PowerShell), Stage 1 guarantees:
+
+- reproducible builds (same inputs  same output locations)
+- a consistent, repeatable command surface (no mystery steps)
+- upload-ready artifacts for common distributors
+
+Stage 1 is optimized for prose-first content. Math-heavy technical publishing is best-effort in this release.
+
+---
+
+## Draft2Digital (ebook)  upload checklist
+
+### Build
+
+From repo root:
+
+~~~powershell
+.\publish\rebuild_publish.ps1
+~~~
+
+Confirm outputs exist (paths may vary by script target, but should be under `outputs/`):
+
+- `outputs\epub\... .epub` (preferred for D2D)
+- `outputs\docx\... .docx` (fallback)
+
+### Cover (ebook front)
+
+Prepare a front cover image (JPG/PNG). Suggested repo location:
+
+- `assets\cover\ebook_front.png`
+
+### Upload to Draft2Digital
+
+- Upload cover: use your front cover image
+- Upload book file: use the EPUB from `outputs\epub\`
+
+---
+
+## Print (if used)  interior + cover wrap
+
+### Interior PDF
+Use the print interior PDF generated under `outputs\pdf\`.
+
+### Cover wrap PDF (to do)
+Create a full wrap cover PDF sized to trim + spine + bleed. Suggested repo location:
+
+- `assets\cover\print_wrap.pdf`
+
+
+<!-- STAGE1_D2D_BLOCK_START -->
+
+---
+
+## Stage 1 promise (what this repo guarantees)
+
+If you follow the canonical workflow in this repo on Windows (PowerShell), Stage 1 guarantees:
+
+- reproducible builds (same inputs  same output locations)
+- a consistent, repeatable command surface (no mystery steps)
+- upload-ready artifacts for common distributors
+
+Stage 1 is optimized for prose-first content. Math-heavy technical publishing is best-effort in this release.
+
+---
+
+## Draft2Digital (ebook)  upload checklist
+
+### Build
+
+From repo root:
+
+~~~powershell
+.\publish\rebuild_publish.ps1
+~~~
+
+Confirm outputs exist (paths may vary by script target, but should be under `outputs/`):
+
+- `outputs\epub\... .epub` (preferred for D2D)
+- `outputs\docx\... .docx` (fallback)
+
+### Cover (ebook front)
+
+Prepare a front cover image (JPG/PNG). Suggested repo location:
+
+- `assets\cover\ebook_front.png`
+
+### Upload to Draft2Digital
+
+- Upload cover: use your front cover image
+- Upload book file: use the EPUB from `outputs\epub\`
+
+---
+
+## Print (if used)  interior + cover wrap
+
+### Interior PDF
+Use the print interior PDF generated under `outputs\pdf\`.
+
+### Cover wrap PDF (to do)
+Create a full wrap cover PDF sized to trim + spine + bleed. Suggested repo location:
+
+- `assets\cover\print_wrap.pdf`
+
+<!-- STAGE1_D2D_BLOCK_END -->
+
