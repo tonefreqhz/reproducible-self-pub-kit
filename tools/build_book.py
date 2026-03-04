@@ -151,7 +151,7 @@ def print_config(pp, src: Path, meta: Path | None, out_stem: str) -> None:
 
 def validate_skeleton(pp) -> None:
     must_exist_dir(pp.inputs, "inputs")
-    must_exist_dir(pp.outputs, "outputs")
+    ensure_dir(pp.outputs)  # outputs/ is created on build (ANCHOR)
     must_exist_dir(pp.publication, "publication")
     print("OK: path sanity checks passed.")
 
