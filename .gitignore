@@ -7,3 +7,7 @@ archive/
 
 /manuscripts/incoming/
 /manuscripts/staging/
+
+# Local publish logs
+publication/_reports/last_publish_log.txt
+
