@@ -343,3 +343,6 @@ Create a full wrap cover PDF sized to trim + spine + bleed. Suggested repo locat
 
 <!-- STAGE1_D2D_BLOCK_END -->
 
+
+### Using AI Tools Like ChatGPT
+If you use AI (e.g., GPT-4) to generate/edit text, paste the output directly into MyBook/Manuscript.md. No cutting/pasting needed—edit in place. The build handles Markdown from any source.
