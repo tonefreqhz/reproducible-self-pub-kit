@@ -1,4 +1,4 @@
-# Reproducible Self‑Pub Kit — Anchor (Ground Truth)
+# Dough Forge the Reproducible Self Pub Kit — Anchor (Ground Truth)
 
 > This repo exists because **drift is the default**—and reproducibility is a feature you have to build on purpose.
 >
@@ -67,3 +67,4 @@ If the folder is suffixed (example: `.old`), rename it back to the canonical roo
 cd "$HOME\OneDrive\Desktop"
 Rename-Item "reproducible-self-pub-kit.old" "reproducible-self-pub-kit"
 ~~~
+

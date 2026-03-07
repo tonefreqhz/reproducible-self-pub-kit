@@ -1,4 +1,4 @@
-﻿# Reproducible SelfPub Kit  Release Notes (Stage 1)
+# Dough Forge the Reproducible Self Pub Kit  Release Notes (Stage 1)
 
 Stage 1 marks the it builds the same way twice milestone: a prose-first, Windows-friendly, reproducible selfpublishing workflow with a stable repo layout and repeatable output locations. This release intentionally prioritizes **general authors** and a **low-drama build** over covering every edge case in technical publishing.
 
@@ -40,4 +40,5 @@ If there is sufficient interest, a Technical Authors Edition will add:
 - stronger diagnostics for Pandoc  XeLaTeX failures
 
 ---
+
 
