@@ -20,3 +20,7 @@ git push
 
 ## W⚓ Protocol
 See [W⚓_PROTOCOL.md](W⚓_PROTOCOL.md) for the emergency reset protocol.
+
+
+## License
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
