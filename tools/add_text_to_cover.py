@@ -25,13 +25,27 @@ cursor_color = (0, 0, 0)  # Black cursor
 width, height = image.size
 
 # Add title (top center)
-title_text = "Reproducible Self‑Pub Kit"
+# Read title from metadata (per anchor ground truth)
+with open(r"publication\metadata_pamphlet_issue_1.md", "r") as f:
+    for line in f:
+        if line.startswith("title:"):
+            title_text = line.split('"')[1]
+            break
+    else:
+        title_text = "Dough Forge the Reproducible Self Pub Kit"
 bbox = draw.textbbox((0, 0), title_text, font=title_font)
 text_width = bbox[2] - bbox[0]
 draw.text(((width - text_width) / 2, 100), title_text, fill=text_color, font=title_font)
 
 # Add subtitle (below title)
-subtitle_text = "Shipping Without Surprises"
+sub# Read title from metadata (per anchor ground truth)
+with open(r"publication\metadata_pamphlet_issue_1.md", "r") as f:
+    for line in f:
+        if line.startswith("title:"):
+            title_text = line.split('"')[1]
+            break
+    else:
+        title_text = "Dough Forge the Reproducible Self Pub Kit"
 bbox = draw.textbbox((0, 0), subtitle_text, font=subtitle_font)
 text_width = bbox[2] - bbox[0]
 draw.text(((width - text_width) / 2, 180), subtitle_text, fill=text_color, font=subtitle_font)
@@ -100,3 +114,4 @@ draw.text((text_x, text_y), full_text, fill=screen_text_color, font=seal_font)
 # Save the final cover
 image.save(FINAL_COVER)
 print(f"Cover with transparent seal background (vector-style), adjusted position, and all features added: {FINAL_COVER}")
+
