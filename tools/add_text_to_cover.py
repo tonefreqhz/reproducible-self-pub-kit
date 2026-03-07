@@ -130,3 +130,4 @@ image.save(FINAL_COVER)
 print(f"Cover with transparent seal background (vector-style), adjusted position, and all features added: {FINAL_COVER}")
 
 
+
