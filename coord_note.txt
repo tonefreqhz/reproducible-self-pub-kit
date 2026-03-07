@@ -1,0 +1,2 @@
+=== Coord Note ===
+Assets synced to homeix, FAIR compiled with cover in homeix/outputs/ (math preserved). Anti-drift, grounded.
