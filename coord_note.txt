@@ -6,3 +6,5 @@ FAIR compiled from vault/canonical, output to homeix/outputs/. Separated from ou
 FAIR compiled from vault/canonical, output to homeix/outputs/. Separated from outputs/ pipeline (dough, pamphlets). Math preserved.
 === LaTeX Fix Note ===
 Cover.tex fixed with --include-before-body, FAIR re-compiled to homeix/outputs/. Math preserved.
+=== LaTeX Preamble Fix Note ===
+\usepackage removed from cover.tex, FAIR re-compiled to homeix/outputs/. Math preserved.
