@@ -1,7 +1,7 @@
+from __future__ import annotations
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # Add repo root to path for anchor import
-from __future__ import annotations
 
 import os
 from dataclasses import dataclass
@@ -95,4 +95,5 @@ def project_paths(project_root: Path | None = None) -> ProjectPaths:
         publish=root / "publish",
         templates=root / "templates",
     )
+
 
