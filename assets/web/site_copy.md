@@ -1,4 +1,4 @@
-﻿# Reproducible SelfPub Kit
+# Dough Forge the Reproducible Self Pub Kit
 
 A practical, automation-first workflow for building and shipping clean EPUB + print-ready PDFs from Markdown.
 
@@ -17,3 +17,4 @@ Authors writing technical books, docs, or code manuals who want fewer tools and 
 
 ## About the author
 (Add a short bio here.)
+

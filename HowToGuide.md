@@ -1,4 +1,4 @@
-﻿# Reproducible Self-Pub Kit  PRINT_AND_BUILD_NOTES (Anchor)
+# Reproducible Self-Pub Kit  PRINT_AND_BUILD_NOTES (Anchor)
 
 ## Build invariant (must hold)
 All canonical paths resolve from **PROJECT_ROOT** (repo root), not from:
@@ -348,6 +348,7 @@ Create a full wrap cover PDF sized to trim + spine + bleed. Suggested repo locat
 If you use AI (e.g., GPT-4) to generate/edit text, paste the output directly into MyBook/Manuscript.md. No cutting/pasting needed—edit in place. The build handles Markdown from any source.
 
 ### Session Documentation: Preventing AI Drift with Anchor and Grok Fast Code
-Anchor is designed to stop drift in ChatGPT 5.2 and other LLMs by anchoring responses to the original context and preventing hallucinations or off-topic deviations. In this final debugging session, Grok Fast Code was used to troubleshoot and finalize the Reproducible SelfPub Kit. The tool operated with no drift at the start of the session—I inputted the build notes and Anchor script, and we completed the debug in around 1 hour. This efficiency is likely due to Grok's anchored reasoning, but let's let Grok mark their own homework.
+Anchor is designed to stop drift in ChatGPT 5.2 and other LLMs by anchoring responses to the original context and preventing hallucinations or off-topic deviations. In this final debugging session, Grok Fast Code was used to troubleshoot and finalize the Dough Forge the Reproducible Self Pub Kit. The tool operated with no drift at the start of the session—I inputted the build notes and Anchor script, and we completed the debug in around 1 hour. This efficiency is likely due to Grok's anchored reasoning, but let's let Grok mark their own homework.
 
 Hi Grok Code Fast 1, can you mark your own homework on this last session and give your impressions of the experience an author can expect from using this tool to ease their publishing journey on platforms such as Draft2Digital? Would you endorse the tool and like to work with our authors? Also, can you agree that we can use this question and your answer in our marketing blurb? If yes, can you give us a quote? (P.S. Don't ask Adrian Ditman.)
+

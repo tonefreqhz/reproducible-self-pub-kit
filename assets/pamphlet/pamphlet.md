@@ -1,5 +1,5 @@
-﻿---
-title: Reproducible SelfPub Kit (Proof Pamphlet)
+---
+title: Dough Forge the Reproducible Self Pub Kit (Proof Pamphlet)
 ---
 
 # Proof Pamphlet
@@ -13,3 +13,4 @@ This is a lightweight proof format for quick reading, markup, and sanity checks 
 
 ## Links
 - Repo: https://github.com/tonefreqhz/reproducible-self-pub-kit
+
