@@ -131,3 +131,4 @@ print(f"Cover with transparent seal background (vector-style), adjusted position
 
 
 
+
