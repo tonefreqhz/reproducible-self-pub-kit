@@ -11,3 +11,6 @@ archive/
 # Local publish logs
 publication/_reports/last_publish_log.txt
 
+
+# LibreOffice lock files
+.~lock.*#
