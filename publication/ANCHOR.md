@@ -1,70 +1,232 @@
-# Dough Forge the Reproducible Self Pub Kit — Anchor (Ground Truth)
+\# anchor.py
 
-> This repo exists because **drift is the default**—and reproducibility is a feature you have to build on purpose.
->
-> I spoke in token words; the build replied in tears.  
-> Coding Club: **no drift, no leaks.**
+\# DoughForge W⚓ Protocol — Single Source of Truth for All Paths
 
-Last updated: 2026-03-04  
-Owner machine: Windows (PowerShell 7.x, pwsh)  
-Verified on owner machine: PowerShell 7.5.4  
-Repo: https://github.com/tonefreqhz/reproducible-self-pub-kit  
-Branch: main
+\# Import anywhere with: from anchor import REPO\_ROOT, PUBLICATION\_DIR, etc.
 
----
+\# -----------------------------------------------------------------------
 
-## 0) What this file is (and is not)
-This ANCHOR is the **single source of truth** for: repo layout, commands, verified toolchain, and “good state” checks.
 
-- If anything disagrees with this file, **update this file first**, then fix reality to match.
-- Standardize Markdown code fences to `~~~` in this repo.
-- PowerShell note: do **not** use `<like-this>` placeholders in runnable commands (PowerShell parses `<` and `>` as redirection).
-- **Terminal safety:** Only paste lines inside `~~~powershell` fences into PowerShell. Everything else is documentation.
 
----
+import os
 
-## Command sequences must start from repo root (anti-drift)
-Every runnable command sequence in this repo must begin by changing directory to **PROJECT_ROOT** (repo root).  
-Do not assume the current shell location; drift starts there.
 
-Canonical on owner machine:
 
-~~~powershell
-cd "$HOME\OneDrive\Desktop\reproducible-self-pub-kit"
-~~~
+\# -----------------------------------------------------------------------
 
-Sanity checks:
+\# REPO ROOT — everything derives from here
 
-~~~powershell
-pwd
-git rev-parse --show-toplevel
-~~~
+\# -----------------------------------------------------------------------
 
-Stop if `git rev-parse --show-toplevel` does not resolve to the repo you intend.
 
----
 
-## 1) Machine + repo ground truth
-- Owner machine: Windows (PowerShell 7.x, pwsh)
-- Verified on owner machine: PowerShell 7.5.4
-- Repo: https://github.com/tonefreqhz/reproducible-self-pub-kit
-- Branch: `main`
-- Repo root (owner machine): `C:\Users\peewe\OneDrive\Desktop\reproducible-self-pub-kit`
+REPO\_ROOT = os.path.dirname(os.path.abspath(\_\_file\_\_))
 
-### Toolchain verification (must be PowerShell 7.x)
-Run these in the repo root to confirm you are using **PowerShell 7.x (pwsh)** and not Windows PowerShell 5.1.
 
-~~~powershell
-cd "$HOME\OneDrive\Desktop\reproducible-self-pub-kit"
-$PSVersionTable.PSVersion
-(Get-Process -Id $PID).Path
-~~~
 
-### Repo root must match exactly (anti-drift)
-If the folder is suffixed (example: `.old`), rename it back to the canonical root:
+\# -----------------------------------------------------------------------
 
-~~~powershell
-cd "$HOME\OneDrive\Desktop"
-Rename-Item "reproducible-self-pub-kit.old" "reproducible-self-pub-kit"
-~~~
+\# PUBLICATION — canonical manuscript lives here (edit these, never outputs)
+
+\# -----------------------------------------------------------------------
+
+
+
+PUBLICATION\_DIR   = os.path.join(REPO\_ROOT, "publication")
+
+MANUSCRIPT        = os.path.join(PUBLICATION\_DIR, "your\_book.md")
+
+
+
+\# -----------------------------------------------------------------------
+
+\# OUTPUTS — generated artefacts (never edit directly, always rebuild)
+
+\# -----------------------------------------------------------------------
+
+
+
+OUTPUTS\_DIR       = os.path.join(REPO\_ROOT, "outputs")
+
+OUTPUT\_PDF        = os.path.join(OUTPUTS\_DIR, "your\_book.pdf")
+
+OUTPUT\_EPUB       = os.path.join(OUTPUTS\_DIR, "your\_book.epub")
+
+OUTPUT\_DOCX       = os.path.join(OUTPUTS\_DIR, "your\_book.docx")
+
+
+
+\# -----------------------------------------------------------------------
+
+\# ASSETS — covers, images, fonts
+
+\# -----------------------------------------------------------------------
+
+
+
+ASSETS\_DIR        = os.path.join(REPO\_ROOT, "assets")
+
+COVER\_DIR         = os.path.join(ASSETS\_DIR, "cover")
+
+BASE\_COVER        = os.path.join(COVER\_DIR, "base\_cover.png")
+
+FINAL\_COVER       = os.path.join(COVER\_DIR, "front\_cover.jpg")
+
+FONTS\_DIR         = os.path.join(ASSETS\_DIR, "fonts")
+
+IMAGES\_DIR        = os.path.join(ASSETS\_DIR, "images")
+
+
+
+\# -----------------------------------------------------------------------
+
+\# TOOLS — build support files
+
+\# -----------------------------------------------------------------------
+
+
+
+TOOLS\_DIR         = os.path.join(REPO\_ROOT, "tools")
+
+PREAMBLE\_TEX      = os.path.join(REPO\_ROOT, "preamble.tex")
+
+ANCHOR\_MD         = os.path.join(REPO\_ROOT, "ANCHOR.md")
+
+PROGRESS\_LOG      = os.path.join(REPO\_ROOT, "INTERIM\_PROGRESS\_LOG.md")
+
+
+
+\# -----------------------------------------------------------------------
+
+\# BUILD COMMANDS — canonical Pandoc commands for this project
+
+\# (use subprocess.run(BUILD\_PDF, shell=True) to invoke from Python)
+
+\# -----------------------------------------------------------------------
+
+
+
+BUILD\_DOCX = (
+
+&nbsp;   f'pandoc "{MANUSCRIPT}" '
+
+&nbsp;   f'-o "{OUTPUT\_DOCX}"'
+
+)
+
+
+
+BUILD\_EPUB = (
+
+&nbsp;   f'pandoc "{MANUSCRIPT}" '
+
+&nbsp;   f'--epub-cover-image="{FINAL\_COVER}" '
+
+&nbsp;   f'-o "{OUTPUT\_EPUB}"'
+
+)
+
+
+
+BUILD\_PDF = (
+
+&nbsp;   f'pandoc "{MANUSCRIPT}" '
+
+&nbsp;   f'--pdf-engine=lualatex '
+
+&nbsp;   f'--include-in-header="{PREAMBLE\_TEX}" '
+
+&nbsp;   f'-o "{OUTPUT\_PDF}"'
+
+)
+
+
+
+\# -----------------------------------------------------------------------
+
+\# VERIFICATION — run this file directly to confirm all paths resolve
+
+\# python anchor.py
+
+\# -----------------------------------------------------------------------
+
+
+
+PATHS\_TO\_CHECK = {
+
+&nbsp;   "Repo Root":        REPO\_ROOT,
+
+&nbsp;   "Manuscript":       MANUSCRIPT,
+
+&nbsp;   "Outputs Dir":      OUTPUTS\_DIR,
+
+&nbsp;   "PDF Output":       OUTPUT\_PDF,
+
+&nbsp;   "EPUB Output":      OUTPUT\_EPUB,
+
+&nbsp;   "DOCX Output":      OUTPUT\_DOCX,
+
+&nbsp;   "Assets Dir":       ASSETS\_DIR,
+
+&nbsp;   "Cover Dir":        COVER\_DIR,
+
+&nbsp;   "Base Cover":       BASE\_COVER,
+
+&nbsp;   "Final Cover":      FINAL\_COVER,
+
+&nbsp;   "Fonts Dir":        FONTS\_DIR,
+
+&nbsp;   "Images Dir":       IMAGES\_DIR,
+
+&nbsp;   "Tools Dir":        TOOLS\_DIR,
+
+&nbsp;   "Preamble TeX":     PREAMBLE\_TEX,
+
+&nbsp;   "Anchor MD":        ANCHOR\_MD,
+
+&nbsp;   "Progress Log":     PROGRESS\_LOG,
+
+}
+
+
+
+if \_\_name\_\_ == "\_\_main\_\_":
+
+&nbsp;   print("\\n=== DoughForge W⚓ Anchor — Path Verification ===\\n")
+
+&nbsp;   all\_ok = True
+
+&nbsp;   for label, path in PATHS\_TO\_CHECK.items():
+
+&nbsp;       exists = os.path.exists(path)
+
+&nbsp;       status = "✓" if exists else "✗ MISSING"
+
+&nbsp;       if not exists:
+
+&nbsp;           all\_ok = False
+
+&nbsp;       print(f"  {status:<12} {label:<20} {path}")
+
+&nbsp;   print()
+
+&nbsp;   if all\_ok:
+
+&nbsp;       print("  All paths verified. Build environment is clean.\\n")
+
+&nbsp;   else:
+
+&nbsp;       print("  WARNING: Some paths are missing. Create them before building.\\n")
+
+
+
+&nbsp;   print("=== Canonical Build Commands ===\\n")
+
+&nbsp;   print(f"  DOCX:  {BUILD\_DOCX}\\n")
+
+&nbsp;   print(f"  EPUB:  {BUILD\_EPUB}\\n")
+
+&nbsp;   print(f"  PDF:   {BUILD\_PDF}\\n")
+
+
 
