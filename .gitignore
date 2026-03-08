@@ -20,3 +20,7 @@ catalogue/chunked/
 catalogue/unchunked/
 inputs/canonical/chapters/
 inputs/canonical/chunks/
+
+.venv/
+__pycache__/
+*.pyc
