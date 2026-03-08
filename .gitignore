@@ -11,3 +11,6 @@ archive/
 # Local publish logs
 publication/_reports/last_publish_log.txt
 
+
+# Large catalogue files — use Git LFS or external storage
+the-new-commonwealth-of-oceana*.epub
