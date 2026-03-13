@@ -1,21 +1,20 @@
-## 🔒 Session Anchor — Start Here Every Time
-
-Before every session (human or AI), run:
-
-``powershell
-cd "<YOUR_REPO_ROOT>"
-.\AutoAnchor.ps1
-````n
-Paste the full output into your AI prompt before asking anything else.
-**ANCHOR VERIFIED — no drift detected.** means you are safe to proceed.
-Never skip this step. Never assume the shell is already in the right place.
-
----
-
 # Reproducible Self-Publishing Kit
 
 > Ship books, newsletters, blog posts, and investment decks
 > from plain text to print-ready PDF — reproducibly, every time.
+
+---
+
+> ⚠️ **BEFORE YOU DO ANYTHING — HUMAN OR AI — RUN THIS:**
+>
+> ```powershell
+> cd "<YOUR_REPO_ROOT>"
+> .\anchor_verify.ps1
+> ```
+>
+> Paste the full output into your AI chat before typing a single instruction.
+> If every line says `[OK]` you are anchored. If anything says `[MISSING]` stop and fix it first.
+> An AI that has not seen this output is **not anchored** and will drift.
 
 ---
 
@@ -37,93 +36,6 @@ Designed for:
 
 ### 1. Clone the repo
 
-    git clone https://github.com/tonefreqhz/reproducible-self-pub-kit
-    cd reproducible-self-pub-kit
-
-### 2. Install dependencies
-
-    pip install Pillow numpy
-
-### 3. Add your assets
-
-    assets/
-      cover/
-        base_cover.png     <- your AI-generated or designed cover
-        stamp_clean.png    <- transparent PNG badge/stamp (optional)
-      fonts/
-        VT323-Regular.ttf  <- or any TTF font you prefer
-
-### 4. Configure your book
-
-Edit the config block at the top of scripts/build_cover.py:
-
-    BASE_DIR = r'C:\path\to\YourProject'
-    TITLE    = 'Your Book Title'
-    SUBTITLE = 'Your Subtitle'
-    AUTHOR   = 'Your Name'
-
-### 5. Build your cover
-
-    python scripts\build_cover.py
-
-Output lands in covers/:
-
-    covers/
-      front_cover.png   <- web / GitHub
-      front_cover.jpg   <- Draft2Digital print upload
-      front_cover.gif   <- social preview
-
----
-
-## Project Structure
-
-    YourProject/
-    +-- assets/
-    |   +-- cover/
-    |   |   +-- base_cover.png
-    |   |   +-- stamp_clean.png
-    |   |   +-- final_cover.jpg      <- mirrored after build
-    |   +-- fonts/
-    |       +-- VT323-Regular.ttf
-    +-- covers/                       <- purged and rebuilt on every run
-    +-- docs/
-    |   +-- build_notes.md
-    +-- scripts/
-    |   +-- build_cover.py
-    +-- book.yaml                     <- coming: single config for all scripts
-
----
-
-## The Core Principle
-
-Every output file is derived, never manually edited.
-If you need to change something, change the source and rebuild.
-
-This means:
-- No mystery files in covers/ from six months ago
-- No "which version did I upload?" confusion
-- Every build is identical given the same inputs
-- Works across books, decks, newsletters — same pattern
-
----
-
-## Roadmap
-
-- [ ] book.yaml config reader (replace hardcoded strings)
-- [ ] build_interior.py — Markdown to print-ready PDF via Pandoc
-- [ ] build_newsletter.py — Markdown to HTML email
-- [ ] build_deck.py — Markdown to reveal.js / PDF deck
-- [ ] GitHub Actions workflow — build on every push
-- [ ] Draft2Digital API upload (when available)
-
----
-
-## Live Example
-
-DoughForge — the first book built with this kit:
-- Repo: https://github.com/tonefreqhz/DoughForge
-- Kit:  https://github.com/tonefreqhz/reproducible-self-pub-kit
-
----
-
-Built by Roger G Lewis · MIT License
+```powershell
+git clone https://github.com/tonefreqhz/reproducible-self-pub-kit
+cd reproducible-self-pub-kit
