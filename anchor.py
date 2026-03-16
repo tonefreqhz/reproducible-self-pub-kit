@@ -1,37 +1,41 @@
-DoughForge
-A publishing pipeline for independent authors, built on the W-Anchor Protocol.
+import os
 
-What This Is
-DoughForge is a book project and a toolkit. It contains:
+# W-Anchor Protocol — reproducible-self-pub-kit
+# Every path in the build derives from here. Never hardcode elsewhere.
 
-The manuscript — The Conquest of DoughForge
-The pipeline — Pandoc builds producing EPUB, PDF, and DOCX from one Markdown source
-The anchor — anchor.py, a path verifier that keeps every session grounded
-Quick Start
-Run this to check your build environment is working:
+REPO_ROOT   = os.path.dirname(os.path.abspath(__file__))
+ASSETS_DIR  = os.path.join(REPO_ROOT, "assets")
+COVER_DIR   = os.path.join(ASSETS_DIR, "cover")
+COVERS_DIR  = os.path.join(REPO_ROOT, "covers")
+DOCS_DIR    = os.path.join(REPO_ROOT, "docs")
+FONTS_DIR   = os.path.join(ASSETS_DIR, "fonts")
+SCRIPTS_DIR = os.path.join(REPO_ROOT, "scripts")
+WIDGETS_DIR = os.path.join(REPO_ROOT, "widgets")
+README      = os.path.join(REPO_ROOT, "README.md")
+ANCHOR_MD   = os.path.join(REPO_ROOT, "ANCHOR.md")
 
-python anchor.py
-Build commands:
-
-pandoc publication\your_book.md -o outputs\your_book.docx
-pandoc publication\your_book.md --epub-cover-image="assets\cover\front_cover.jpg" -o outputs\your_book.epub
-pandoc publication\your_book.md --pdf-engine=lualatex --include-in-header=preamble.tex -o outputs\your_book.pdf
-The W-Anchor Protocol
-Context drift is what happens when an AI assistant forgets what you agreed on three hours ago. The W-Anchor Protocol prevents it by keeping a single document — ANCHOR.md — that both human and AI read at the start of every session.
-
-Full documentation: ANCHOR.md
-
-Folder Structure
-publication/       the manuscript lives here — edit this, never the outputs
-outputs/           generated EPUB, PDF, DOCX files — never edit directly
-assets/cover/      cover images
-scripts/           build helper scripts
-docs/              documentation and session archive
-anchor.py          run this to verify your build environment
-preamble.tex       LaTeX settings for PDF builds
-book.yaml          chapter list and EPUB metadata
-Related
-reproducible-self-pub-kit: https://github.com/tonefreqhz/reproducible-self-pub-kit
-
-Licence
-MIT
+if __name__ == "__main__":
+    paths = {
+        "Repo Root"  : REPO_ROOT,
+        "Assets Dir" : ASSETS_DIR,
+        "Cover Dir"  : COVER_DIR,
+        "Covers Out" : COVERS_DIR,
+        "Docs Dir"   : DOCS_DIR,
+        "Fonts Dir"  : FONTS_DIR,
+        "Scripts Dir": SCRIPTS_DIR,
+        "Widgets Dir": WIDGETS_DIR,
+        "README"     : README,
+        "ANCHOR.md"  : ANCHOR_MD,
+    }
+    print("\n=== W-Anchor Protocol — reproducible-self-pub-kit ===\n")
+    all_ok = True
+    for name, path in paths.items():
+        status = "OK     " if os.path.exists(path) else "MISSING"
+        if not os.path.exists(path):
+            all_ok = False
+        print(f"  [{status}] {name}: {path}")
+    print()
+    if all_ok:
+        print("  All paths verified. You are anchored.\n")
+    else:
+        print("  One or more paths missing. Fix before building.\n")
