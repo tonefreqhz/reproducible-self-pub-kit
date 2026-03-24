@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# reproducible-self-pub-kit pre-commit hook — M8
+# Blocks commits that include output files without a build attestation.
+#
+
+STAGED_OUTPUTS=$(git diff --cached --name-only -- 'outputs/' 'manuscripts/catalogue staging/' 2>/dev/null | grep -v 'BUILD_ATTESTATION.json' | grep -v 'BUILD_SUMMARY.md')
+
+if [ -n "$STAGED_OUTPUTS" ]; then
+    ATTESTATION_STAGED=$(git diff --cached --name-only -- 'outputs/BUILD_ATTESTATION.json' 2>/dev/null)
+
+    if [ -z "$ATTESTATION_STAGED" ]; then
+        echo ""
+        echo "================================================================"
+        echo " BLOCKED: Output files staged without build attestation."
+        echo "================================================================"
+        echo ""
+        echo " Run:  python scripts/build_attestation.py"
+        echo " Then: git add outputs/BUILD_ATTESTATION.json outputs/BUILD_SUMMARY.md"
+        echo "================================================================"
+        echo ""
+        exit 1
+    fi
+fi
+
+exit 0
