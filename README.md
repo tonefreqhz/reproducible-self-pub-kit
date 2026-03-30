@@ -49,3 +49,25 @@ Designed for:
 ```powershell
 git clone https://github.com/tonefreqhz/reproducible-self-pub-kit
 cd reproducible-self-pub-kit
+```
+
+---
+
+## Transclusion Guide
+
+**Layer classification:** Literary
+
+This repo provides the build infrastructure and W-Anchor Protocol that governs all five repositories. It is the methodological backbone -- the "how" that makes the other repos reproducible.
+
+### Key Transclusions FROM This Repo
+
+| Target | What Flows |
+|--------|-----------|
+| **All repos** | W-Anchor Protocol (`anchor_verify.ps1`) -- the session gate enforced everywhere |
+| **DoughForge** | Build pipeline produces EPUB, PDF, DOCX, and audio from Markdown source |
+| **Father Brown** | AQAL voice widget system (`widgets/`) used as the writing instrument |
+
+### Interrogation Tools
+
+- **Flux Capacitor:** DoughForge repo `.well-known/flux-capacitor.json` (canonical transclusion graph)
+- **Build verification:** Run `.\anchor_verify.ps1` in any repo to confirm path integrity
