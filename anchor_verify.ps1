@@ -1,4 +1,4 @@
-Write-Host ""
+﻿Write-Host ""
 Write-Host "============================================================"
 Write-Host " REPRODUCIBLE SELF-PUB KIT — ANCHOR VERIFY"
 Write-Host "============================================================"
