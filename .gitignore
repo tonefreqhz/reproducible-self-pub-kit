@@ -31,3 +31,10 @@ covers/
 
 # Drift log backups
 logs/DRIFT_LOG.csv.bak
+
+# Business-sensitive — local only
+widgets/voice_widgets/nicola_evans.md
+manuscripts/*investor*.md
+manuscripts/*confidential*.md
+docs/capital/
+docs/correspondence/
