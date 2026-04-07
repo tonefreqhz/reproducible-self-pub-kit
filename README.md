@@ -1,3 +1,13 @@
+## For New Users
+
+If you just cloned this repo and want to build a book:
+
+--> Read [START_HERE.md](START_HERE.md)
+
+Everything below is for the DoughForge ecosystem and AI-assisted sessions.
+
+---
+
 > ⚓ **HUMAN: before you type anything to the AI, run this and paste the full output into the chat.**
 >
 > ```powershell
