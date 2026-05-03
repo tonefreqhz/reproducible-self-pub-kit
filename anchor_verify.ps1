@@ -4,7 +4,7 @@ Write-Host " REPRODUCIBLE SELF-PUB KIT — ANCHOR VERIFY"
 Write-Host "============================================================"
 Write-Host ""
 
-$root = "C:\Users\peewe\OneDrive\Desktop\reproducible-self-pub-kit"
+$root = $PSScriptRoot
 
 $paths = @{
     "Repo Root"         = $root

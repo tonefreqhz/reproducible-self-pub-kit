@@ -52,7 +52,7 @@ def find_project_root(start: Path | None = None) -> Path:
     if here.is_file():
         here = here.parent
 
-    unique_markers: tuple[str, ...] = ("HowToGuide.md",)
+    unique_markers: tuple[str, ...] = ("HowToGuide.md", "ANCHOR.md", "W⚓_PROTOCOL.md")
     common_markers: tuple[str, ...] = ("pyproject.toml", "README.md", ".git")
     expected_dirs: tuple[str, ...] = ("publication", "tools", "publish", "outputs")
 
