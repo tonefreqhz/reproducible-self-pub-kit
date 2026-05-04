@@ -20,7 +20,7 @@
 | 6 | 978-1-0676560-5-8 | The Case of the Elusive W-Anchor | EPUB | Assigned |
 | 7 | 978-1-0676560-6-5 | Home@ix FAIR-Index | Paperback | Assigned |
 | 8 | 978-1-0676560-7-2 | Home@ix FAIR-Index | EPUB | Assigned |
-| 9 | 978-1-0676560-8-9 | Reserved | — | Unassigned |
+| 9 | 978-1-0676560-8-9 | The Wandering Anchor | EPUB | Assigned |
 | 10 | 978-1-0676560-9-6 | Reserved | — | Unassigned |
 
 ## Notes
