@@ -162,7 +162,10 @@ def manuscript_source(pp, src_arg: Path | None) -> Path:
 
 
 def pandoc_base_cmd(src: Path, out: Path, meta: Path | None, display_title: str | None) -> list[str]:
-    cmd = ["pandoc", str(src), "-o", str(out)]
+    # TOC patch · 8 May 2026 · W-Anchor c9ced1a · feedback_book_build_spec compliance.
+    # Adds --toc and --toc-depth=2 so PDF/EPUB/DOCX builds carry a real Table of Contents.
+    # Original kit invocation had no TOC. Backup at build_book.py.bak_pre_toc_patch_08may2026.
+    cmd = ["pandoc", str(src), "-o", str(out), "--toc", "--toc-depth=2"]
     if meta is not None:
         must_exist_file(meta, "metadata")
         cmd.extend(["--metadata-file", str(meta)])
